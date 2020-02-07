@@ -1,0 +1,69 @@
+LOGOFF REMOTE USER
+
+logoff 5 /server:"IOS" | qwinsta /server:"IOS" "sim"
+
+5 burda uzaktaki makinadaki login olmus  kullanýcý ID si
+
+********************************
+
+.\PsExec.exe \\192.168.31.54 -u WORKGROUP\hvladmin -p thyadmin -d -s -i 1 cmd -accepteula > combined.txt 2>&1
+
+$Notepad = "C:\Windows\System32\notepad.exe"
+
+WORK ************  REMOVE -l command gozuksun kullanýcý
+
+.\PsExec.exe \\192.168.31.54 -u WORKGROUP\hvladmin -p thyadmin -l -d -s -i 9  runas /user:WORKGROUP\dev -h "C:\Windows\System32\notepad.exe" -accepteula >> combined.txt 2>&1    
+
+
+*************************************
+GET LOGIN USERS NAME
+
+$consoleuser = query session | select-string console | foreach { -split $_ } | select -index 1
+
+QWINSTA /server:IOS | select-string Active | foreach { -split $_ } | select -index 2
+
+*****************************************
+
+GET ACTIVE USER ID
+
+query user | select-string Active | foreach { -split $_ } | select -index 2
+
+******************************************
+
+.\PsExec.exe \\192.168.31.54 -u WORKGROUP\hvladmin -p thyadmin -l -d -s -i 1 cmd /c "powershell -noninteractive -command gci c:\"
+
+**********************************************
+
+https://4sysops.com/archives/how-to-find-a-logged-in-user-remotely-using-powershell/
+
+LoggedOnUser
+
+function Get-LoggedOnUser
+ {
+     [CmdletBinding()]
+     param
+     (
+         [Parameter()]
+         [ValidateScript({ Test-Connection -ComputerName $_ -Quiet -Count 1 })]
+         [ValidateNotNullOrEmpty()]
+         [string[]]$ComputerName = $env:COMPUTERNAME
+     )
+     foreach ($comp in $ComputerName)
+     {
+         $output = @{ 'ComputerName' = $comp }
+         $output.UserName = (Get-WmiObject -Class win32_computersystem -ComputerName $comp).UserName
+         [PSCustomObject]$output
+     }
+ }
+ 
+ ***********************************************
+ 
+ Get on Desktop 
+ 
+ (New-Object -ComObject shell.application).toggleDesktop()
+ 
+ *******************
+ 
+ PDQ Deploy
+ 
+ **************************************s
