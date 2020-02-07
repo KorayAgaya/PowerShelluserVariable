@@ -1,18 +1,18 @@
 LOGOFF REMOTE USER
 
-logoff 5 /server:"IOS" | qwinsta /server:"IOS" "sim"
+logoff 5 /server:"Server02" | qwinsta /server:"IOS" "dev"
 
-5 burda uzaktaki makinadaki login olmus  kullanýcý ID si
+5 burda uzaktaki makinadaki login olmus  kullanici ID si
 
 ********************************
 
-.\PsExec.exe \\192.168.31.54 -u WORKGROUP\hvladmin -p thyadmin -d -s -i 1 cmd -accepteula > combined.txt 2>&1
+.\PsExec.exe \\2.2.2.2 -u WORKGROUP\xxxx -p yyyyy -d -s -i 1 cmd -accepteula > combined.txt 2>&1
 
 $Notepad = "C:\Windows\System32\notepad.exe"
 
-WORK ************  REMOVE -l command gozuksun kullanýcý
+WORK ************  REMOVE -l command gozuksun kullanÃ½cÃ½
 
-.\PsExec.exe \\192.168.31.54 -u WORKGROUP\hvladmin -p thyadmin -l -d -s -i 9  runas /user:WORKGROUP\dev -h "C:\Windows\System32\notepad.exe" -accepteula >> combined.txt 2>&1    
+.\PsExec.exe \\1.1.1.1 -u WORKGROUP\xxxx -p yyyyy -l -d -s -i 9  runas /user:WORKGROUP\dev -h "C:\Windows\System32\notepad.exe" -accepteula >> combined.txt 2>&1    
 
 
 *************************************
@@ -30,7 +30,7 @@ query user | select-string Active | foreach { -split $_ } | select -index 2
 
 ******************************************
 
-.\PsExec.exe \\192.168.31.54 -u WORKGROUP\hvladmin -p thyadmin -l -d -s -i 1 cmd /c "powershell -noninteractive -command gci c:\"
+.\PsExec.exe \\4.4.4.4 -u WORKGROUP\xxxxx -p yyyyyy -l -d -s -i 1 cmd /c "powershell -noninteractive -command gci c:\"
 
 **********************************************
 
